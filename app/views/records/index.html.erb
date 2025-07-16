@@ -1,0 +1,32 @@
+<%# app/views/records/index.html.erb %>
+
+<%# ✅ Flash notice styled %>
+<% if notice %>
+  <div class="mb-4 rounded-md bg-green-100 p-4 text-green-800 border border-green-300">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% content_for :title, "Records" %>
+
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Records</h1>
+
+<%# ✅ Records list %>
+<div id="records" class="space-y-6">
+  <% @records.each do |record| %>
+    <div class="rounded-lg border border-gray-300 p-4 shadow-sm bg-white">
+      <%= render record %>
+
+      <div class="mt-2">
+        <%= link_to "Show this record", record,
+              class: "inline-block text-blue-600 hover:text-blue-800 underline font-medium" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%# ✅ New record button %>
+<div class="mt-6">
+  <%= link_to "New record", new_record_path,
+        class: "inline-block px-4 py-2 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition" %>
+</div>
