@@ -1,19 +1,23 @@
 Rails.application.routes.draw do
+  # Use Devise with custom omniauth callbacks
+
   resources :records
-  get "home/index"
-  #root "home#index"
-  root "records#index"
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  namespace :oauth do
+    namespace :google_oauth2 do
+      get "callback"
+    end
+  end
+
+  # You can use home#index or records#index as the landing page
+  # get "home/index"
+  root "home#index"
+
+  # Health check
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
+  # Optional PWA routes (commented out by default)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
