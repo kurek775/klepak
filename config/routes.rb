@@ -1,23 +1,23 @@
 Rails.application.routes.draw do
-  # Use Devise with custom omniauth callbacks
+  # Login routes
+  get "/login", to: "login#new"
+  get "home", to: "home#index", as: :home
 
-  resources :records
+  post "/oauth/google_oauth2", to: "login#create"
 
+  # Main app logic
+  resources :users
 
+  # OAuth callback namespace (if needed by Omniauth)
   namespace :oauth do
     namespace :google_oauth2 do
       get "callback"
     end
   end
 
-  # You can use home#index or records#index as the landing page
-  # get "home/index"
-  root "home#index"
+  # Root path
+  root "login#new" # or "home#index" if you want a different root for logged-in users
 
   # Health check
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Optional PWA routes (commented out by default)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 end

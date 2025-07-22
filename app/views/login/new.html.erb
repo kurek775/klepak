@@ -1,0 +1,12 @@
+   <div class="mx-auto">
+  <div class="mx-auto max-w-xl bg-white rounded-2xl shadow-xl p-8 text-center">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome</h1>
+      <p class="text-gray-500 mb-6">Please sign in to continue</p>
+
+      <%= form_tag("/oauth/google_oauth2", method: "post", data: { turbo: "false" }) do %>
+        <button type="submit"
+          class="border border-gray-300 hover:border-gray-500 text-black font-semibold px-6 py-2 rounded-lg transition shadow-sm hover:shadow-md">
+          Sign in with Google
+        </button>
+      <% end %>
+      </div></div>
